@@ -22,7 +22,7 @@ public class Archivo {
 	      linea = entrada.leer();
 	    }
 	    
-	    entrada.cerrar();//Cierro archivo
+	    entrada.cerrar();//Cierro archiv
 	    return nroLineas;
 	}
 	
