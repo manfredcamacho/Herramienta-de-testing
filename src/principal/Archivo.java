@@ -31,6 +31,7 @@ public class Archivo {
 		Entrada entrada = new Entrada(ruta);
 		String linea;
 		String aux;
+		
 		boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
 		long nroComentarios = 0;
    		     
