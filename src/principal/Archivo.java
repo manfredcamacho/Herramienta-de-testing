@@ -22,7 +22,7 @@ public class Archivo {
 	      linea = entrada.leer();
 	    }
 	    
-	    entrada.cerrar();//Cierro archivo
+	    entrada.cerrar();//Archivo cerrado
 	    return nroLineas;
 	}
 	
@@ -31,8 +31,8 @@ public class Archivo {
 		Entrada entrada = new Entrada(ruta);
 		String linea;
 		String aux;
-		boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
 		long nroComentarios = 0;
+		boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
    		     
 	    while ((linea = entrada.leer())!=null){
 	    	linea = linea.trim();
