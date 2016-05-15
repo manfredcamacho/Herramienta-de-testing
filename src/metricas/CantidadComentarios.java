@@ -1,22 +1,19 @@
 package metricas;
 
 import java.util.List;
-/*
- * Cambiar nombre clase
- * 
- */
-public class Archivo {	
+
+public class CantidadComentarios implements Metrica {
 	
-	//Devuelve el numero total de lineas de codigo
-	public long contarLineasCodigo(List<String> metodo){
-		return metodo.size();
+	private Integer nroComentarios;
+	
+	public String getNombre() {
+		return "Cantidad de comentarios";
 	}
-	
-	//Devuelve el numero de lineas de comentario 
-	public long contarLineasComentario(List<String> metodo){
+
+	public void calcular(List<String> metodo) {
 		String aux = null;
-		int nroComentarios = 0;
-		boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
+		this.nroComentarios = 0;
+		Boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
 		
 		for(String linea : metodo){			
 		
@@ -36,11 +33,10 @@ public class Archivo {
 	    		}
 			}
 		}
-	    return nroComentarios;
 	}
-	
-	public double porcentajeComentarios(int numeroComentario, int numeroLineas){
-		return (numeroComentario * 100) / numeroLineas;
+
+	public String obtenerResultado() {
+		return String.format("%s: %s", this.getNombre(), this.nroComentarios);
 	}
 
 }

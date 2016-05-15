@@ -1,26 +1,19 @@
 package metricas;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ComplejidadCiclomatica {
-
-	public static void leerArchivoYMostrar(final String rutaArchivo){
-		try {
-			List<String> metodo = Files.readAllLines(Paths.get(rutaArchivo));
-			Integer cc = ComplejidadCiclomatica.calcular(metodo);
-			System.out.println("Complejidad ciclomatica: "+cc.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+public class ComplejidadCiclomatica  implements Metrica {
 	
-	public static Integer calcular(List<String> metodo){
-		Integer complejidad = 0;
+	private Integer complejidad;
+	
+	public String getNombre() {
+		return "Complejidad ciclomática";
+	}
+
+	public void calcular(List<String> metodo) {
+		this.complejidad = 0;
 		
 		for(String linea : metodo){
 			
@@ -36,7 +29,7 @@ public class ComplejidadCiclomatica {
 						 + StringUtils.countMatches(linea, "catch (");
 		}
 		
-		return complejidad + 1;
+		this.complejidad += 1;
 	}
 	
 	private static String normalizar(String linea){
@@ -66,6 +59,10 @@ public class ComplejidadCiclomatica {
 			.replaceAll("\\?", " ? ")
 			//unificar multiples espacios
 			.replaceAll("( )+", " ");
+	}
+
+	public String obtenerResultado() {
+		return String.format("%s: %s", this.getNombre(), this.complejidad);
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Halstead {
+public class Halstead implements Metrica {
 	
     private Integer longitud;
 	private Double volumen;
@@ -13,30 +13,27 @@ public class Halstead {
     private Integer cantidadOperadores = 0;
     private Integer cantidadOperandosUnicos = 0;
     private Integer cantidadOperandos = 0;
-	
 
-    String operadores [] = {"if", "else", "case", "default", "for", "while", "catch", "throw",
+    private final String operadores [] = {"if", "else", "case", "default", "for", "while", "catch", "throw",
 			"+", "-", "*", "/", "==", "!=", "=", "<=", ">=", "<", ">",
 			"&&", "||", "and", "or", "equal to"};
 
-    //Set que contendrá los operadores del código fuente
+    //Set que contendra los operadores del codigo fuente
 	private Set<String> setOperadores = new HashSet<String>();
-	
-	//Set que contendrá los operandos del código fuente
+	//Set que contendra los operandos del codigo fuente
 	private Set<String> setOperandos = new HashSet<String>();
 
-	public Halstead(List<String> metodo){
-		this.procesar(metodo);
+	public String getNombre() {
+		return "Halsted";
 	}
 	
-    private void procesar(List<String> metodo) {
-    	
+	public void calcular(List<String> metodo) {
     	this.longitud = 0;
     	this.volumen = 0.0;
     	    	
         for (String linea : metodo) {            
-            buscarOperadores(linea);
-            buscarOperandos(linea);
+            this.buscarOperadores(linea);
+            this.buscarOperandos(linea);
         }
         
         this.cantidadOperadoresUnicos = this.setOperadores.size();
@@ -48,44 +45,26 @@ public class Halstead {
     }
     
     private void buscarOperadores(String linea) {
-    	for(int i = 0; i < this.operadores.length - 1; i++)
+    	for(int i = 0; i < this.operadores.length - 1; i++){
     		if(linea.contains(this.operadores[i])) {
     			this.cantidadOperadores += 1;
     			this.setOperadores.add(this.operadores[i]);
     		}
+    	}
     }
     
     private void buscarOperandos(String linea) {
     	String operandos[] = linea.split("^.*(if|else|case|default|for|while|catch|throw|\\+|-|\\*|\\/"
     									 + "|={1}?|!=|={2}?|<=|>=|<{1}?|>{1}?|&&|\\|{2}?|and|or|equal to).*");
-    	for(int i = 0; i < operandos.length ; i++)
-    	{
+    	
+    	for(int i = 0; i < operandos.length ; i++) {
     		this.cantidadOperandos += 1;
     		this.setOperandos.add(operandos[i]);
     	}
     }
-    
-    public Integer getLongitud() {
-		return longitud;
-	}
 
-	public Double getVolumen() {
-		return volumen;
-	}
-	
-	 public Integer getCantidadOperadoresUnicos() {
-			return cantidadOperadoresUnicos;
-	}
-
-	public Integer getCantidadOperadores() {
-		return cantidadOperadores;
-	}
-
-	public Integer getCantidadOperandosUnicos() {
-		return cantidadOperandosUnicos;
-	}
-
-	public Integer getCantidadOperandos() {
-		return cantidadOperandos;
+	public String obtenerResultado() {
+		return String.format("%s : Longitud %s - Volumen %s", 
+				this.getNombre(), this.longitud, this.volumen);
 	}
 }
