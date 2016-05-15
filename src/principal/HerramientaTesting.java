@@ -1,19 +1,22 @@
 package principal;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Clase;
 import entidades.Metodo;
+import gui.GUIConsola;
 import lector.LectorJavaParser;
-import metricas.CantidadComentarios;
-import metricas.CantidadLineas;
-import metricas.ComplejidadCiclomatica;
-import metricas.FanIn;
-import metricas.FanOut;
-import metricas.Halstead;
 import metricas.Metrica;
+import metricas.ResultadoMetrica;
+import metricas.impl.CantidadComentarios;
+import metricas.impl.CantidadLineas;
+import metricas.impl.ComplejidadCiclomatica;
+import metricas.impl.FanIn;
+import metricas.impl.FanOut;
+import metricas.impl.Halstead;
 
 public class HerramientaTesting {
 
@@ -21,19 +24,20 @@ public class HerramientaTesting {
 	
 	public static void main(String[] args) {
 		
-		HerramientaTesting herramienta = new HerramientaTesting();
-		
 		File proyecto = new File("/home/nicolass/dev/unlam/analisissoftware/workspace/Triangulo");
-		herramienta.leerProyecto(proyecto);
+
+		HerramientaTesting herramienta = new HerramientaTesting(proyecto);
 		
-		new GUIConsola(herramienta).ejecutar();;
+		new GUIConsola(herramienta).ejecutar();
+		
 	}
 	
-	public void leerProyecto(File rutaProyecto){
+	public HerramientaTesting (File rutaProyecto){
 		this.proyecto = new LectorJavaParser().leerProyecto(rutaProyecto);
 	}
 	
-	public void calcularMetricas(Metodo metodo){
+	public List<ResultadoMetrica> calcularMetricas(Metodo metodo){
+		List<ResultadoMetrica> resultados = new ArrayList<ResultadoMetrica>();
 		
 		List<Metrica> metricas = new ArrayList<Metrica>();
 		metricas.add(new CantidadLineas());
@@ -45,8 +49,9 @@ public class HerramientaTesting {
 		
 		for(Metrica metrica : metricas){
 			metrica.calcular(metodo);
-			System.out.println(metrica.obtenerResultado());
+			resultados.add(metrica.obtenerResultado());
 		}
+		return resultados;
 	}
 
 	public List<Clase> getProyecto() {

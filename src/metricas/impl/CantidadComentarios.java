@@ -1,10 +1,13 @@
-package metricas;
+package metricas.impl;
 
 import java.util.List;
 
 import entidades.Metodo;
+import entidades.Nombrable;
+import metricas.Metrica;
+import metricas.ResultadoMetrica;
 
-public class CantidadComentarios implements Metrica {
+public class CantidadComentarios implements Metrica, Nombrable {
 	
 	private Integer nroComentarios;
 	
@@ -38,8 +41,8 @@ public class CantidadComentarios implements Metrica {
 		}
 	}
 
-	public String obtenerResultado() {
-		return String.format("%s: %s", this.getNombre(), this.nroComentarios);
+	public ResultadoMetrica obtenerResultado() {
+		return new ResultadoMetrica( this.getNombre(), this.nroComentarios.toString() );
 	}
 
 }

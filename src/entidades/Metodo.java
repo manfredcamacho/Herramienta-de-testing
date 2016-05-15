@@ -2,7 +2,7 @@ package entidades;
 
 import java.util.List;
 
-public class Metodo {
+public class Metodo implements Nombrable {
 
 	private String nombre;
 	private Clase clase;

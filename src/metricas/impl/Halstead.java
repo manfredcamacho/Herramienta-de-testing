@@ -1,14 +1,17 @@
-package metricas;
+package metricas.impl;
 
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
 import entidades.Metodo;
+import entidades.Nombrable;
+import metricas.Metrica;
+import metricas.ResultadoMetrica;
 
-public class Halstead implements Metrica {
+public class Halstead implements Metrica, Nombrable {
 	
     private Integer longitud;
 	private Double volumen;
@@ -68,8 +71,13 @@ public class Halstead implements Metrica {
     	}
     }
 
-	public String obtenerResultado() {
-		return String.format("%s : Longitud %d - Volumen %.2f", 
-				this.getNombre(), this.longitud, this.volumen);
+	public ResultadoMetrica obtenerResultado() {
+		return new ResultadoMetrica(
+				this.getNombre(), 
+				String.format(
+						"Longitud %d - Volumen %.2f", 
+						this.longitud, this.volumen
+					)
+				);
 	}
 }

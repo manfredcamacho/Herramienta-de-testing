@@ -1,10 +1,10 @@
-package metricas;
+package ayuda;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class StringAyuda {
+public class Cadenas {
 
 	public static String normalizar(String linea){
 		String lineaNormalizada = linea;
@@ -38,7 +38,10 @@ public class StringAyuda {
 	public static Integer cantidadOcurrenciasMetodo(String nombreMetodo, List<String> codigo){
 		Integer cant = 0;
 		for(String linea : codigo){
-			cant += StringUtils.countMatches(normalizar(linea), nombreMetodo.toLowerCase().trim().concat(" ("));
+			cant += StringUtils.countMatches(
+					normalizar(linea), 
+					nombreMetodo.toLowerCase().trim().concat(" (")
+				);
 		}
 		return cant;
 	}

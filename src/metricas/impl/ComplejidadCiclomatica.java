@@ -1,12 +1,16 @@
-package metricas;
+package metricas.impl;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import ayuda.Cadenas;
 import entidades.Metodo;
+import entidades.Nombrable;
+import metricas.Metrica;
+import metricas.ResultadoMetrica;
 
-public class ComplejidadCiclomatica  implements Metrica {
+public class ComplejidadCiclomatica  implements Metrica, Nombrable {
 	
 	private Integer complejidad;
 	
@@ -20,7 +24,7 @@ public class ComplejidadCiclomatica  implements Metrica {
 		
 		for(String linea : codigo){
 			
-			linea = StringAyuda.normalizar(linea);
+			linea = Cadenas.normalizar(linea);
 			
 			complejidad += StringUtils.countMatches(linea, "if (")
 						 + StringUtils.countMatches(linea, "while (")
@@ -35,8 +39,8 @@ public class ComplejidadCiclomatica  implements Metrica {
 		this.complejidad += 1;
 	}
 	
-	public String obtenerResultado() {
-		return String.format("%s: %s", this.getNombre(), this.complejidad);
+	public ResultadoMetrica obtenerResultado() {
+		return new ResultadoMetrica( this.getNombre(), this.complejidad.toString() );
 	}
 
 }
