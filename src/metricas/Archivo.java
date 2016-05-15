@@ -1,42 +1,26 @@
-package principal;
+package metricas;
 
-import entradaSalida.Entrada;
-
-public class Archivo {
-	private String ruta;
-	
-	public Archivo(String file){
-		this.ruta = file;
-	}
+import java.util.List;
+/*
+ * Cambiar nombre clase
+ * 
+ */
+public class Archivo {	
 	
 	//Devuelve el numero total de lineas de codigo
-	public long contarLineasCodigo(){
-		Entrada entrada = new Entrada(ruta);
-		String linea;
-		long nroLineas = 0;	
-		
-		linea = entrada.leer();
-		
-	    while (linea != null){
-	      nroLineas++;	
-	      linea = entrada.leer();
-	    }
-	    
-	    entrada.cerrar();//Cierro archiv
-	    return nroLineas;
+	public long contarLineasCodigo(List<String> metodo){
+		return metodo.size();
 	}
 	
 	//Devuelve el numero de lineas de comentario 
-	public long contarLineasComentario(){
-		Entrada entrada = new Entrada(ruta);
-		String linea;
-		String aux;
-		
+	public long contarLineasComentario(List<String> metodo){
+		String aux = null;
+		int nroComentarios = 0;
 		boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
-		long nroComentarios = 0;
-   		     
-	    while ((linea = entrada.leer())!=null){
-	    	linea = linea.trim();
+		
+		for(String linea : metodo){			
+		
+			linea = linea.trim();
 	    	if (linea.length() > 0) {
 	    		if(linea.length() == 1){
 	    			if(linea.equals("*"))
@@ -50,10 +34,13 @@ public class Archivo {
 						buscandoFB = -1 == linea.indexOf("*/"); //Si encuentra el final del bloque pongo el flag en false
 					}
 	    		}
-			}		    	
-	    }
-	    entrada.cerrar();//Cierro archivo
+			}
+		}
 	    return nroComentarios;
 	}
 	
+	public double porcentajeComentarios(int numeroComentario, int numeroLineas){
+		return (numeroComentario * 100) / numeroLineas;
+	}
+
 }
