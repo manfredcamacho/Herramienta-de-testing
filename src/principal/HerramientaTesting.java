@@ -3,7 +3,6 @@ package principal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import entidades.Clase;
 import entidades.Metodo;
