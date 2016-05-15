@@ -69,7 +69,7 @@ public class Halstead implements Metrica {
     }
 
 	public String obtenerResultado() {
-		return String.format("%s : Longitud %s - Volumen %s", 
+		return String.format("%s : Longitud %d - Volumen %.2f", 
 				this.getNombre(), this.longitud, this.volumen);
 	}
 }

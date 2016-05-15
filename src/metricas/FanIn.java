@@ -19,7 +19,13 @@ public class FanIn implements Metrica {
 	}
 
 	public void calcular(Metodo metodo) {
-		List<String> codigo = metodo.getCodigo();
+		this.fanIn = 0;
+		
+		for(Clase claseProyecto : this.proyecto){
+			for(Metodo metodoClaseProyecto : claseProyecto.getMetodos()){
+				this.fanIn += StringAyuda.cantidadOcurrenciasMetodo(metodo.getNombre(), metodoClaseProyecto.getCodigo());
+			}
+		}
 		
 //		Entrada: nombre del metodo a buscar
 //

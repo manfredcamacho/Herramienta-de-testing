@@ -20,7 +20,7 @@ public class ComplejidadCiclomatica  implements Metrica {
 		
 		for(String linea : codigo){
 			
-			linea = normalizar(linea);
+			linea = StringAyuda.normalizar(linea);
 			
 			complejidad += StringUtils.countMatches(linea, "if (")
 						 + StringUtils.countMatches(linea, "while (")
@@ -35,35 +35,6 @@ public class ComplejidadCiclomatica  implements Metrica {
 		this.complejidad += 1;
 	}
 	
-	private static String normalizar(String linea){
-		String lineaNormalizada = linea;
-		
-		//borrar comentarios
-		if(linea.contains("//")){
-			lineaNormalizada = lineaNormalizada.substring( 0, lineaNormalizada.indexOf("//") );
-		}
-		
-		return lineaNormalizada
-			.trim()
-			.toLowerCase()
-			.replaceAll("\\t", "")
-			.replaceAll("\\n", "")
-			//borrar todo entre comillas
-			.replaceAll("\".*?\"", "\"\"")
-			//aseguramos al menos un espacio antes y después de los siguientes caracteres
-			.replaceAll("\\(", " ( ")
-			.replaceAll("\\)", " ) ")
-			.replaceAll("\\{", " { ")
-			.replaceAll("\\}", " } ")
-			.replaceAll("\\,", " , ")
-			.replaceAll("\\;", " ; ")
-			.replaceAll("\\&\\&", " && ")
-			.replaceAll("\\|\\|", " || ")
-			.replaceAll("\\?", " ? ")
-			//unificar multiples espacios
-			.replaceAll("( )+", " ");
-	}
-
 	public String obtenerResultado() {
 		return String.format("%s: %s", this.getNombre(), this.complejidad);
 	}

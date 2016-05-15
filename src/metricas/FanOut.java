@@ -19,8 +19,13 @@ public class FanOut implements Metrica {
 	}
 
 	public void calcular(Metodo metodo) {
-		List<String> codigo = metodo.getCodigo();
 		this.fanOut = 0;
+		
+		for(Clase claseProyecto : this.proyecto){
+			for(Metodo metodoClaseProyecto : claseProyecto.getMetodos()){
+				this.fanOut += StringAyuda.cantidadOcurrenciasMetodo(metodoClaseProyecto.getNombre(), metodo.getCodigo());
+			}
+		}
 		
 //		Entrada: codigo del metodo a buscar
 //
@@ -28,8 +33,6 @@ public class FanOut implements Metrica {
 //		-> Iterar Metodos Proyecto
 //			   -> Iterar lineas de codigo del metodo a buscar
 //			   		-> Guardar cantidad de veces que contiene cada linea del codigo del metodo a buscar al nombre del metodo proyecto
-		
-		
 	}
 
 	public String obtenerResultado() {
