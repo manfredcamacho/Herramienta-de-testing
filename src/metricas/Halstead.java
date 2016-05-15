@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
+import entidades.Metodo;
+
 public class Halstead implements Metrica {
 	
     private Integer longitud;
@@ -27,11 +31,12 @@ public class Halstead implements Metrica {
 		return "Halsted";
 	}
 	
-	public void calcular(List<String> metodo) {
+	public void calcular(Metodo metodo) {
+		List<String> codigo = metodo.getCodigo();
     	this.longitud = 0;
     	this.volumen = 0.0;
     	    	
-        for (String linea : metodo) {            
+        for (String linea : codigo) {            
             this.buscarOperadores(linea);
             this.buscarOperandos(linea);
         }
@@ -47,7 +52,7 @@ public class Halstead implements Metrica {
     private void buscarOperadores(String linea) {
     	for(int i = 0; i < this.operadores.length - 1; i++){
     		if(linea.contains(this.operadores[i])) {
-    			this.cantidadOperadores += 1;
+    			this.cantidadOperadores += StringUtils.countMatches(linea, this.operadores[i]);
     			this.setOperadores.add(this.operadores[i]);
     		}
     	}

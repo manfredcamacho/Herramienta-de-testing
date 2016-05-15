@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import entidades.Metodo;
+
 public class ComplejidadCiclomatica  implements Metrica {
 	
 	private Integer complejidad;
@@ -12,10 +14,11 @@ public class ComplejidadCiclomatica  implements Metrica {
 		return "Complejidad ciclomática";
 	}
 
-	public void calcular(List<String> metodo) {
+	public void calcular(Metodo metodo) {
+		List<String> codigo = metodo.getCodigo();
 		this.complejidad = 0;
 		
-		for(String linea : metodo){
+		for(String linea : codigo){
 			
 			linea = normalizar(linea);
 			

@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidades.Metodo;
 import metricas.CantidadComentarios;
 import metricas.CantidadLineas;
 import metricas.ComplejidadCiclomatica;
@@ -14,12 +15,13 @@ import metricas.Metrica;
 
 public class Main {
 	public static void main(String[] args) {
-		leerArchivoYMostrar("src/metodo.txt");
+		leerArchivoYMostrar();
 	}
 	
-	public static void leerArchivoYMostrar(final String rutaArchivo){
+	public static void leerArchivoYMostrar(){
 		try {
-			List<String> metodo = Files.readAllLines(Paths.get(rutaArchivo));
+			List<String> codigoMetodo = Files.readAllLines(Paths.get("src/metodo.txt"));
+			Metodo metodo = new Metodo("Prueba", null, codigoMetodo);
 			
 			List<Metrica> metricas = new ArrayList<Metrica>();
 			metricas.add(new CantidadLineas());

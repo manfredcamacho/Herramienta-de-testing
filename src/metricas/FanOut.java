@@ -3,6 +3,7 @@ package metricas;
 import java.util.List;
 
 import entidades.Clase;
+import entidades.Metodo;
 
 public class FanOut implements Metrica {
 
@@ -17,9 +18,18 @@ public class FanOut implements Metrica {
 		return "Fan Out";
 	}
 
-	public void calcular(List<String> metodo) {
-		// TODO Auto-generated method stub
-
+	public void calcular(Metodo metodo) {
+		List<String> codigo = metodo.getCodigo();
+		this.fanOut = 0;
+		
+//		Entrada: codigo del metodo a buscar
+//
+//		Iterar Clases
+//		-> Iterar Metodos Proyecto
+//			   -> Iterar lineas de codigo del metodo a buscar
+//			   		-> Guardar cantidad de veces que contiene cada linea del codigo del metodo a buscar al nombre del metodo proyecto
+		
+		
 	}
 
 	public String obtenerResultado() {

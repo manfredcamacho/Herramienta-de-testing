@@ -2,6 +2,8 @@ package metricas;
 
 import java.util.List;
 
+import entidades.Metodo;
+
 public class CantidadComentarios implements Metrica {
 	
 	private Integer nroComentarios;
@@ -10,12 +12,13 @@ public class CantidadComentarios implements Metrica {
 		return "Cantidad de comentarios";
 	}
 
-	public void calcular(List<String> metodo) {
+	public void calcular(Metodo metodo) {
+		List<String> codigo = metodo.getCodigo();
 		String aux = null;
 		this.nroComentarios = 0;
 		Boolean buscandoFB = false;//indica si se esta buscando el fin de bloque
 		
-		for(String linea : metodo){			
+		for(String linea : codigo){			
 		
 			linea = linea.trim();
 	    	if (linea.length() > 0) {

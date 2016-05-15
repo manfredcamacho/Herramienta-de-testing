@@ -2,6 +2,8 @@ package metricas;
 
 import java.util.List;
 
+import entidades.Metodo;
+
 public class CantidadLineas implements Metrica {
 	
 	private Integer cantidadLineas;
@@ -10,8 +12,9 @@ public class CantidadLineas implements Metrica {
 		return "Cantidad de lineas";
 	}
 
-	public void calcular(List<String> metodo) {
-		this.cantidadLineas = metodo.size();
+	public void calcular(Metodo metodo) {
+		List<String> codigo = metodo.getCodigo();
+		this.cantidadLineas = codigo.size();
 	}
 
 	public String obtenerResultado() {
