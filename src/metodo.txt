@@ -1,5 +1,6 @@
 private void enviarDatos(){
 		try {
+		//defino triangulo
 			triangulo = new Triangulo(
 					Integer.valueOf(this.tf_lado1.getText()),
 					Integer.valueOf(this.tf_lado2.getText()),
@@ -17,7 +18,10 @@ private void enviarDatos(){
 				mostrarError("Ingrese valores enteros entre 1 y 9999.");
 				resetFields();
 			}
-			
+			/*
+			*esto es un comment
+			*
+			*/
 		} catch (NumberFormatException ex ){
 			mostrarError("Ingrese solo valores num\u00e9ricos enteros y no nulos.");
 			resetFields();
