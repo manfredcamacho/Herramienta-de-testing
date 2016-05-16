@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import entidades.Clase;
 import entidades.Metodo;
 import interfaz.Consola;
@@ -23,38 +24,31 @@ public class HerramientaTesting {
 
 	private List<Clase> proyecto;
 	
-	/*public static void main(String[] args) {
-		
-		try {
-			File proyecto;
-			
-			if(args.length>0){
-				proyecto = new File(args[0]);
-			} else {
-				//Evaluar mismo proyecto
-				proyecto = new File(new File(".").getCanonicalPath());
-			}
-			
-			HerramientaTesting herramienta = new HerramientaTesting(proyecto);
-			
-			new Consola(herramienta).ejecutar();
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-	
 	public static void main(final String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+		
+		if(args.length==0){
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						GUI frame = new GUI();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+			});
+		} else {
+			try {
+				//Si se pasa un argumento se supone que es el path a analizar 
+				//y se ejecuta en interfaz de consola.
+				File proyecto = new File(args[0]);
+				HerramientaTesting herramienta = new HerramientaTesting(proyecto);
+				new Consola(herramienta).ejecutar();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		});
+		}
+		
 	}
 	
 	public HerramientaTesting (File rutaProyecto){

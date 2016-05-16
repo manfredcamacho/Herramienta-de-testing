@@ -10,6 +10,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
+import ayuda.TextAreaUpdater;
 import entidades.Clase;
 import entidades.Metodo;
 import metricas.ResultadoMetrica;
@@ -51,7 +53,7 @@ public class GUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblCarpeta = new JLabel("Carpeta: ");
-		lblCarpeta.setBounds(10, 11, 52, 14);
+		lblCarpeta.setBounds(10, 11, 79, 14);
 		contentPane.add(lblCarpeta);
 		
 		tfRuta = new JTextField();
@@ -72,7 +74,7 @@ public class GUI extends JFrame {
 		contentPane.add(cbClases);
 		
 		JLabel lblClass = new JLabel("Clases:");
-		lblClass.setBounds(10, 57, 46, 14);
+		lblClass.setBounds(10, 57, 61, 14);
 		contentPane.add(lblClass);
 		
 		JLabel lblMetodos = new JLabel("M\u00E9todos:");
@@ -85,7 +87,7 @@ public class GUI extends JFrame {
 		contentPane.add(cbMetodos);
 		
 		JLabel lblCodigo = new JLabel("C\u00F3digo:");
-		lblCodigo.setBounds(10, 109, 46, 14);
+		lblCodigo.setBounds(10, 109, 89, 14);
 		contentPane.add(lblCodigo);
 		
 		JSeparator separator = new JSeparator();
@@ -231,7 +233,7 @@ public class GUI extends JFrame {
 			Clase claseElegida = clasesProyecto.get(claseSeleccionada);
 			metodosClaseElegida = claseElegida.getMetodos();
 			
-			//Cargo el comboBox de métodos
+			//Cargo el comboBox de mï¿½todos
 		    for(int indice = 0; indice < metodosClaseElegida.size(); indice++){
 				cbMetodos.addItem(metodosClaseElegida.get(indice).getNombre());			
 			}
@@ -251,10 +253,14 @@ public class GUI extends JFrame {
             
             List<ResultadoMetrica> resultados = herramienta.calcularMetricas(metodoElegido);
 			
-            txtAreaCodigo.setText("");
-            for(int indice = 0; indice < metodoElegido.getCodigo().size(); indice++){
-            	txtAreaCodigo.append(metodoElegido.getCodigo().get(indice) + "\n");			
-			}            
+            new Thread(
+            		new TextAreaUpdater(txtAreaCodigo, metodoElegido.getCodigo())
+        		).start();
+//            txtAreaCodigo.setText("");
+//            for(int indice = 0; indice < metodoElegido.getCodigo().size(); indice++){
+//            	txtAreaCodigo.append(metodoElegido.getCodigo().get(indice) + "\n");			
+//			}   
+//            txtAreaCodigo.update(txtAreaCodigo.getGraphics());
             
             //Aca hay un problema, si cambiamos el orden de resolucion de las metricas esto tambien hay que cambiarlo
 			datoComplejidadCiclomatica.setText(resultados.get(0).getResultado());
