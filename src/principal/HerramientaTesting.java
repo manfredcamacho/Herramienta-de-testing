@@ -1,13 +1,14 @@
 package principal;
 
 
+import java.awt.EventQueue;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import entidades.Clase;
 import entidades.Metodo;
 import interfaz.Consola;
+import interfaz.GUI;
 import lector.LectorJavaParser;
 import metricas.Metrica;
 import metricas.ResultadoMetrica;
@@ -22,7 +23,7 @@ public class HerramientaTesting {
 
 	private List<Clase> proyecto;
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		try {
 			File proyecto;
@@ -41,6 +42,19 @@ public class HerramientaTesting {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}*/
+	
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI frame = new GUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public HerramientaTesting (File rutaProyecto){
@@ -51,10 +65,10 @@ public class HerramientaTesting {
 		List<ResultadoMetrica> resultados = new ArrayList<ResultadoMetrica>();
 		
 		List<Metrica> metricas = new ArrayList<Metrica>();
+		metricas.add(new ComplejidadCiclomatica());
 		metricas.add(new CantidadLineas());
 		metricas.add(new CantidadComentarios());
-		metricas.add(new Halstead());
-		metricas.add(new ComplejidadCiclomatica());
+		metricas.add(new Halstead());		
 		metricas.add(new FanIn(this.proyecto));
 		metricas.add(new FanOut(this.proyecto));
 		
