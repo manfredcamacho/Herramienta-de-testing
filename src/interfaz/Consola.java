@@ -1,4 +1,4 @@
-package gui;
+package interfaz;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,12 +9,12 @@ import entidades.Nombrable;
 import metricas.ResultadoMetrica;
 import principal.HerramientaTesting;
 
-public class GUIConsola {
+public class Consola {
 	
 	private static Scanner teclado = new Scanner(System.in);
 	private HerramientaTesting herramienta;
 	
-	public GUIConsola(HerramientaTesting herramienta) {
+	public Consola(HerramientaTesting herramienta) {
 		this.herramienta = herramienta;
 	}
 

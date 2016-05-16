@@ -7,7 +7,7 @@ import java.util.List;
 
 import entidades.Clase;
 import entidades.Metodo;
-import gui.GUIConsola;
+import interfaz.Consola;
 import lector.LectorJavaParser;
 import metricas.Metrica;
 import metricas.ResultadoMetrica;
@@ -36,7 +36,7 @@ public class HerramientaTesting {
 			
 			HerramientaTesting herramienta = new HerramientaTesting(proyecto);
 			
-			new GUIConsola(herramienta).ejecutar();
+			new Consola(herramienta).ejecutar();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
