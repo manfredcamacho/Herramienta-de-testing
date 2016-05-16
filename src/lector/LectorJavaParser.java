@@ -30,7 +30,8 @@ public class LectorJavaParser extends LectorProyecto {
 									metodo.getName(),
 									clase,
 									Arrays.asList(
-											metodo.getBody().toString().split("\n")
+											metodo.getBody()==null ? 
+													new String[0] : metodo.getBody().toString().split("\n")
 									)
 							)
 					);

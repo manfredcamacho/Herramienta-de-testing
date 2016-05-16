@@ -24,12 +24,23 @@ public class HerramientaTesting {
 	
 	public static void main(String[] args) {
 		
-		File proyecto = new File("/home/nicolass/dev/unlam/analisissoftware/workspace/Triangulo");
-
-		HerramientaTesting herramienta = new HerramientaTesting(proyecto);
+		try {
+			File proyecto;
+			
+			if(args.length>0){
+				proyecto = new File(args[0]);
+			} else {
+				//Evaluar mismo proyecto
+				proyecto = new File(new File(".").getCanonicalPath());
+			}
+			
+			HerramientaTesting herramienta = new HerramientaTesting(proyecto);
+			
+			new GUIConsola(herramienta).ejecutar();
 		
-		new GUIConsola(herramienta).ejecutar();
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public HerramientaTesting (File rutaProyecto){
