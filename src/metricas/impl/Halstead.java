@@ -75,7 +75,7 @@ public class Halstead implements Metrica, Nombrable {
 		return new ResultadoMetrica(
 				this.getNombre(), 
 				String.format(
-						"Longitud %d - Volumen %.2f", 
+						"Longitud %d Volumen %.2f", 
 						this.longitud, this.volumen
 					)
 				);
