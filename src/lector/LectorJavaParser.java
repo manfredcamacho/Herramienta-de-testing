@@ -3,9 +3,11 @@ package lector;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -15,13 +17,14 @@ import entidades.Metodo;
 public class LectorJavaParser extends LectorProyecto {
 
 	@Override
-	protected Clase leerClase(File archivo) {
-		Clase clase = new Clase(archivo.getName().replace(".java", ""), new ArrayList<Metodo>());
-		
+	protected void leerArchivoJava(File archivo, List<Clase> clasesProyecto) {
 		try {
 			CompilationUnit compilationUnit = JavaParser.parse(archivo);
 			
+			Clase clase = new Clase(archivo.getName().replace(".java", ""), new ArrayList<Metodo>());
+			
 			VoidVisitorAdapter<Clase> visitadorMetodos = new VoidVisitorAdapter<Clase>() {
+				
 				@Override
 				public void visit(MethodDeclaration metodo, Clase clase) {
 					
@@ -36,14 +39,34 @@ public class LectorJavaParser extends LectorProyecto {
 							)
 					);
 				}
+
+				@Override
+				public void visit(ConstructorDeclaration constructor, Clase clase) {
+		        	
+		        	String codigoConstructor = constructor.getBlock().toString();
+		        	
+		        	if(! codigoConstructor.isEmpty()){
+		        		
+		        		clase.getMetodos().add(
+								new Metodo(
+										constructor.getName().concat(" (Constructor)"),
+										clase,
+										Arrays.asList( codigoConstructor.split("\n") )
+								)
+						);
+		        	}
+				}
+				
+				
 			};
 			
 			visitadorMetodos.visit(compilationUnit, clase);
 			
+			clasesProyecto.add(clase);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return clase;
 	}
 	
 }

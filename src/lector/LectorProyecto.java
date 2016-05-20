@@ -26,10 +26,10 @@ public abstract class LectorProyecto {
 				this.leer(archivoDirectorio);
 			}
 		} else if (archivo.getName().endsWith(".java")) {
-			this.clases.add( leerClase(archivo) );
+			leerArchivoJava(archivo, this.clases);
 		}
 	}
 
-	protected abstract Clase leerClase(File archivo);
+	protected abstract void leerArchivoJava(File archivo, List<Clase> clasesProyecto);
 	
 }

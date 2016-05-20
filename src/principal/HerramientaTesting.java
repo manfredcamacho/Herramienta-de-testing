@@ -10,7 +10,7 @@ import entidades.Clase;
 import entidades.Metodo;
 import interfaz.Consola;
 import interfaz.GUI;
-import lector.LectorJavaParser;
+import lector.LectorJavaParserAvanzado;
 import metricas.Metrica;
 import metricas.ResultadoMetrica;
 import metricas.impl.CantidadComentarios;
@@ -52,7 +52,7 @@ public class HerramientaTesting {
 	}
 	
 	public HerramientaTesting (File rutaProyecto){
-		this.proyecto = new LectorJavaParser().leerProyecto(rutaProyecto);
+		this.proyecto = new LectorJavaParserAvanzado().leerProyecto(rutaProyecto);
 	}
 	
 	public List<ResultadoMetrica> calcularMetricas(Metodo metodo){

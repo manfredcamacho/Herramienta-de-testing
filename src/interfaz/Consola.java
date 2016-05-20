@@ -51,6 +51,7 @@ public class Consola {
 	}
 
 	private void enumerar(List<? extends Nombrable> nombrables) {
+		System.out.println("\nOpciones: ");
 		for(int indice = 0; indice<nombrables.size(); indice++){
 			System.out.println(
 					String.format(
@@ -59,5 +60,6 @@ public class Consola {
 					)
 				);
 		}
+		System.out.println("\nIngrese numero de opcion: ");
 	}
 }
