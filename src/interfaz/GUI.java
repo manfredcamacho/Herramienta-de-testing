@@ -260,10 +260,12 @@ public class GUI extends JFrame {
             //Aca hay un problema, si cambiamos el orden de resolucion de las metricas esto tambien hay que cambiarlo
             
             /**
+             * Complejidad Ciclomatica
              */
             Integer complejidadCiclomatica = Integer.parseInt(resultados.get(0).getResultado());            
             if( complejidadCiclomatica > 10){
             	datoComplejidadCiclomatica.setForeground(Color.RED);
+            	datoComplejidadCiclomatica.setToolTipText("La complejidad ciclom\u00E1tica supera 10, es recomendable modularizar el m\u00E9todo.");
             }else{
             	datoComplejidadCiclomatica.setForeground(Color.DARK_GRAY);
             	datoComplejidadCiclomatica.setToolTipText(null);
@@ -281,6 +283,7 @@ public class GUI extends JFrame {
 			
 			if( porcentajeComentarios < 15){
 				datoPorcentajeComentarios.setForeground(Color.RED);
+				datoPorcentajeComentarios.setToolTipText("El porcentaje de comentarios recomendable es del 15%. Agregue m\u00E1s comentarios al m\u00E9todo.");
             }else{
             	datoPorcentajeComentarios.setForeground(Color.DARK_GRAY);
             	datoPorcentajeComentarios.setToolTipText(null);
