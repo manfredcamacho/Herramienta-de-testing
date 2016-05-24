@@ -256,21 +256,47 @@ public class GUI extends JFrame {
             new Thread(
             		new TextAreaUpdater(txtAreaCodigo, metodoElegido.getCodigo())
         		).start();
-//            txtAreaCodigo.setText("");
-//            for(int indice = 0; indice < metodoElegido.getCodigo().size(); indice++){
-//            	txtAreaCodigo.append(metodoElegido.getCodigo().get(indice) + "\n");			
-//			}   
-//            txtAreaCodigo.update(txtAreaCodigo.getGraphics());
             
             //Aca hay un problema, si cambiamos el orden de resolucion de las metricas esto tambien hay que cambiarlo
-			datoComplejidadCiclomatica.setText(resultados.get(0).getResultado());
+            
+            /**
+             */
+            Integer complejidadCiclomatica = Integer.parseInt(resultados.get(0).getResultado());            
+            if( complejidadCiclomatica > 10){
+            	datoComplejidadCiclomatica.setForeground(Color.RED);
+            }else{
+            	datoComplejidadCiclomatica.setForeground(Color.DARK_GRAY);
+            	datoComplejidadCiclomatica.setToolTipText(null);
+            }            
+			datoComplejidadCiclomatica.setText(complejidadCiclomatica.toString());
+			
+			
+			/**
+			 * Lineas de codigo, comentarios y porcentaje de comentarios
+			 */
 			datoLineasCodigo.setText(resultados.get(1).getResultado());
 			datoLineasComentarios.setText(resultados.get(2).getResultado());
+			
 			Double porcentajeComentarios = Integer.parseInt(datoLineasComentarios.getText()) * 100.0 / Integer.parseInt(datoLineasCodigo.getText());
+			
+			if( porcentajeComentarios < 15){
+				datoPorcentajeComentarios.setForeground(Color.RED);
+            }else{
+            	datoPorcentajeComentarios.setForeground(Color.DARK_GRAY);
+            	datoPorcentajeComentarios.setToolTipText(null);
+            }
 			datoPorcentajeComentarios.setText(String.format("%.2f", porcentajeComentarios) + "%");
+			
+			/**
+			 * Halstead
+			 */
 			String halstead[] = resultados.get(3).getResultado().split(" ");
 			datoLongitud.setText(halstead[1]);
 			datoVolumen.setText(halstead[3]);
+			
+			/**
+			 * Fan-In y Fan-Out
+			 */
 			datoFanIn.setText(resultados.get(4).getResultado());
 			datoFanOut.setText(resultados.get(5).getResultado());
 			
