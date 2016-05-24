@@ -21,7 +21,7 @@ public class Halstead implements Metrica, Nombrable {
     private Integer cantidadOperandosUnicos = 0;
     private Integer cantidadOperandos = 0;
 
-    private final String operadores [] = {"if", "else", "case", "default", "for", "while", "catch", "throw",
+    private static final String operadores [] = {"if", "else", "case", "default", "for", "while", "catch", "throw",
 			"+", "-", "*", "/", "==", "!=", "=", "<=", ">=", "<", ">",
 			"&&", "||", "and", "or", "equal to"};
 
@@ -53,10 +53,10 @@ public class Halstead implements Metrica, Nombrable {
     }
     
     private void buscarOperadores(String linea) {
-    	for(int i = 0; i < this.operadores.length - 1; i++){
-    		if(linea.contains(this.operadores[i])) {
-    			this.cantidadOperadores += StringUtils.countMatches(linea, this.operadores[i]);
-    			this.setOperadores.add(this.operadores[i]);
+    	for(int i = 0; i < operadores.length - 1; i++){
+    		if(linea.contains(operadores[i])) {
+    			this.cantidadOperadores += StringUtils.countMatches(linea, operadores[i]);
+    			this.setOperadores.add(operadores[i]);
     		}
     	}
     }
@@ -79,5 +79,9 @@ public class Halstead implements Metrica, Nombrable {
 						this.longitud, this.volumen
 					)
 				);
+	}
+	
+	public static String[] getOperadores(){
+		return operadores;
 	}
 }

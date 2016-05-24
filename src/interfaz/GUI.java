@@ -3,8 +3,12 @@ package interfaz;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Image;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -141,11 +145,11 @@ public class GUI extends JFrame {
 		
 		JLabel label_3 = new JLabel("Longitud:");
 		label_3.setForeground(Color.DARK_GRAY);
-		label_3.setBounds(520, 290, 200, 20);
+		label_3.setBounds(520, 290, 111, 20);
 		contentPane.add(label_3);
 		
 		datoLongitud = new JLabel("");
-		datoLongitud.setBounds(520, 320, 200, 20);
+		datoLongitud.setBounds(520, 320, 156, 20);
 		contentPane.add(datoLongitud);
 		
 		JLabel label_4 = new JLabel("Volumen:");
@@ -180,7 +184,15 @@ public class GUI extends JFrame {
 		txtAreaCodigo.setEditable(false);
 		txtAreaCodigo.setBounds(10,135,480,385);
 		contentPane.add(txtAreaCodigo);
-
+		
+		JButton btnInfo = new JButton("");
+		btnInfo.addActionListener(mostrarOperadoresHalstead);
+		Image infoIcon = new ImageIcon(this.getClass().getResource("/info.ico")).getImage();
+		btnInfo.setIcon(new ImageIcon(infoIcon));
+		btnInfo.setToolTipText("M\u00e1s informaci\u00f3n");
+		btnInfo.setBounds(686, 291, 32, 32);
+		contentPane.add(btnInfo);
+		setLocationRelativeTo(null);
 	}
 	
 	ActionListener abrirDirectorio = new ActionListener() {
@@ -306,5 +318,16 @@ public class GUI extends JFrame {
 		}
 	};
 	
+	ActionListener mostrarOperadoresHalstead = new ActionListener() {
+
+		public void actionPerformed(ActionEvent e) {
+			String msg = "";
+			for (String operador : HerramientaTesting.getOperadoresConsiderados()) {
+				msg += operador + "\n";
+			}
+			JOptionPane.showMessageDialog(new JFrame(), msg, "Operadores considerados - Halstead", JOptionPane.INFORMATION_MESSAGE);
+			
+		}
+	};
 }
 

@@ -77,5 +77,8 @@ public class HerramientaTesting {
 		return proyecto;
 	}
 	
+	public static String[] getOperadoresConsiderados(){
+		return Halstead.getOperadores();
+	}
 	
 }
