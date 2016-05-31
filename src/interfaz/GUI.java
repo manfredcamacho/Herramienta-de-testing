@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Image;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -14,7 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
-
 import ayuda.TextAreaUpdater;
 import entidades.Clase;
 import entidades.Metodo;
@@ -34,6 +32,7 @@ public class GUI extends JFrame {
 	private JComboBox<String> cbClases;
 	private JComboBox<String> cbMetodos;
 	private HerramientaTesting herramienta;
+	private String halstead[];
 	private List<Clase> clasesProyecto;
 	private List<Metodo> metodosClaseElegida;
 	private TextArea txtAreaCodigo;
@@ -305,7 +304,7 @@ public class GUI extends JFrame {
 			/**
 			 * Halstead
 			 */
-			String halstead[] = resultados.get(3).getResultado().split(" ");
+			halstead = resultados.get(3).getResultado().split(" ");
 			datoLongitud.setText(halstead[1]);
 			datoVolumen.setText(halstead[3]);
 			
@@ -321,11 +320,20 @@ public class GUI extends JFrame {
 	ActionListener mostrarOperadoresHalstead = new ActionListener() {
 
 		public void actionPerformed(ActionEvent e) {
-			String msg = "";
+			String msg = "Operadores considerados:\n";
 			for (String operador : HerramientaTesting.getOperadoresConsiderados()) {
-				msg += operador + "\n";
+				msg += operador + " , ";
 			}
-			JOptionPane.showMessageDialog(new JFrame(), msg, "Operadores considerados - Halstead", JOptionPane.INFORMATION_MESSAGE);
+			
+			if(halstead != null){
+				msg += "\n\n";
+				msg += "n1 : " + String.format("%3s", halstead[5]) + "     Operadores unicos. \n";
+				msg += "N1 : " + String.format("%3s", halstead[7]) + "     Operadores. \n";
+				msg += "n2 : " + String.format("%3s", halstead[9]) + "     Operandos unicos. \n";
+				msg += "N2 : " + String.format("%3s", halstead[11])+ "    Operandos.\n";
+			}
+
+			JOptionPane.showMessageDialog(new JFrame(), msg, "Informacion - Halstead", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 	};
